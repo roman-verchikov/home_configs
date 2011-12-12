@@ -9,6 +9,7 @@ colorscheme desert
 set incsearch
 set hlsearch
 set ignorecase
+set smartcase
 
 set shiftwidth=4
 set tabstop=4
