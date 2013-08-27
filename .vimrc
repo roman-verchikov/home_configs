@@ -1,14 +1,11 @@
-set nu
-set tabstop=4
-set shiftwidth=4
-set smartcase
-set hlsearch
-set incsearch
-set expandtab
-
-" always display status line
-set laststatus=2
-
 syntax on
 filetype plugin indent on
 
+set expandtab
+set hlsearch
+set incsearch
+set laststatus=2
+set nu
+set shiftwidth=4
+set smartcase
+set tabstop=4
