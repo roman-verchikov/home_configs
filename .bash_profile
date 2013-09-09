@@ -25,6 +25,8 @@ alias ll='ls -lAh'
 alias la='ls -a'
 alias l='ls'
 alias ssh='ssh -A'
+alias df='df -h'
+alias du='du -h'
 
 alias grep='grep --color=always'
 
@@ -33,4 +35,8 @@ alias grep='grep --color=always'
 if [ $(uname -o) = 'Cygwin' ]; then
     keychain $HOME/.ssh/id_rsa
     source $HOME/.keychain/$HOSTNAME-sh
+fi
+
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
 fi
