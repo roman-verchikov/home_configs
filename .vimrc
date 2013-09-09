@@ -9,3 +9,4 @@ set nu
 set shiftwidth=4
 set smartcase
 set tabstop=4
+set background=dark
