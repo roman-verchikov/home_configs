@@ -28,3 +28,9 @@ alias ssh='ssh -A'
 
 alias grep='grep --color=always'
 
+# Add SSH keys to keychain to avoid entering passwords all the time
+# required for cygwin environment only
+if [ $(uname -o) = 'Cygwin' ]; then
+    keychain $HOME/.ssh/id_rsa
+    source $HOME/.keychain/$HOSTNAME-sh
+fi
