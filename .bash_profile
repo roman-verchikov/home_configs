@@ -6,15 +6,7 @@ PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h
 
 if [ $(uname) = 'Darwin' ]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
-
-    vagrant() {
-        local vagrantdir=~/Documents/apple/openstack/stackinthebox/
-        local savedir=$PWD
-
-        cd $vagrantdir
-        command vagrant $@
-        cd $savedir
-    }
+    export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox/
 
     alias ls='ls -G'
 else
@@ -30,11 +22,13 @@ alias du='du -h'
 
 alias grep='grep --color=always'
 
-# Add SSH keys to keychain to avoid entering passwords all the time
-# required for cygwin environment only
 if [ $(uname -o) = 'Cygwin' ]; then
+    # Add SSH keys to keychain to avoid entering passwords all the time
+    # required for cygwin environment only
     keychain $HOME/.ssh/id_rsa
     source $HOME/.keychain/$HOSTNAME-sh
+
+    export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/openstack
 fi
 
 if [ -f ~/.bashrc.local ]; then
