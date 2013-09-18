@@ -6,7 +6,6 @@ PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h
 
 if [ $(uname) = 'Darwin' ]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
-    export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox/
 
     alias ls='ls -G'
 else
@@ -27,9 +26,13 @@ if [ $(uname -o) = 'Cygwin' ]; then
     # required for cygwin environment only
     keychain $HOME/.ssh/id_rsa
     source $HOME/.keychain/$HOSTNAME-sh
-
-    export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/openstack
 fi
+
+case $HOSTNAME in
+    'rverchikov-pc'     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant           ;;
+    'rverchikov-laptop' ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/openstack ;;
+    *                   ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox    ;;
+esac
 
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
