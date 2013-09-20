@@ -29,9 +29,9 @@ if [ $(uname -o) = 'Cygwin' ]; then
 fi
 
 case $HOSTNAME in
-    'rverchikov-pc'     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant           ;;
-    'rverchikov-laptop' ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/openstack ;;
-    *                   ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox    ;;
+    'rverchikov-pc'     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
+    'rverchikov-laptop' ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
+    'rverchikov-mac'    ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
 esac
 
 if [ -f ~/.bashrc.local ]; then
