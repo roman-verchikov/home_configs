@@ -4,14 +4,13 @@
 PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h\[$(tput setaf 3)\] \W\[$(tput sgr0)\]\\$ "
 
 
+ls_colorize_opt='--color'
 if [ $(uname) = 'Darwin' ]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
-
-    alias ls='ls -G'
-else
-    alias ls='ls --color'
+    ls_colorize_opt='-G'
 fi
 
+alias ls="ls --group-directories-first $ls_colorize_opt"
 alias ll='ls -lAh'
 alias la='ls -a'
 alias l='ls'
