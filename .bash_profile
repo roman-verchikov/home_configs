@@ -2,6 +2,7 @@
 
 # add some colors to the prompt
 PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h\[$(tput setaf 3)\] \W\[$(tput sgr0)\]\\$ "
+export EDITOR=vim
 
 
 ls_colorize_opt='--color'
