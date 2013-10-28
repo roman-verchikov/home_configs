@@ -9,6 +9,10 @@ ls_colorize_opt='--color'
 if [ $(uname) = 'Darwin' ]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
     ls_colorize_opt='-G'
+
+    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+        . $(brew --prefix)/share-bash-completion/bash_completion
+    fi
 fi
 
 alias ls="ls --group-directories-first $ls_colorize_opt"
