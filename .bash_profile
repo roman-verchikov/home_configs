@@ -11,8 +11,13 @@ if [ $(uname) = 'Darwin' ]; then
     ls_colorize_opt='-G'
 
     if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-        . $(brew --prefix)/share-bash-completion/bash_completion
+        . $(brew --prefix)/share/bash-completion/bash_completion
     fi
+elif [ $(uname -o) = 'Cygwin' ]; then
+    # Add SSH keys to keychain to avoid entering passwords all the time
+    # required for cygwin environment only
+    keychain $HOME/.ssh/id_rsa
+    source $HOME/.keychain/$HOSTNAME-sh
 fi
 
 alias ls="ls --group-directories-first $ls_colorize_opt"
@@ -24,13 +29,6 @@ alias df='df -h'
 alias du='du -h'
 
 alias grep='grep --color=always'
-
-if [ $(uname -o) = 'Cygwin' ]; then
-    # Add SSH keys to keychain to avoid entering passwords all the time
-    # required for cygwin environment only
-    keychain $HOME/.ssh/id_rsa
-    source $HOME/.keychain/$HOSTNAME-sh
-fi
 
 case $HOSTNAME in
     'rverchikov-pc'     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
