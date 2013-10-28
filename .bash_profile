@@ -4,11 +4,18 @@
 PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h\[$(tput setaf 3)\] \W\[$(tput sgr0)\]\\$ "
 export EDITOR=vim
 
+LS_CMD=$(which ls)
 
 ls_colorize_opt='--color'
 if [ $(uname) = 'Darwin' ]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
-    ls_colorize_opt='-G'
+
+    # use gnu coreutils whenever possible
+    if [ $(which gls) ]; then
+        LS_CMD=$(which gls)
+    else
+        ls_colorize_opt='-G'
+    fi
 
     if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
         . $(brew --prefix)/share/bash-completion/bash_completion
@@ -20,7 +27,7 @@ elif [ $(uname -o) = 'Cygwin' ]; then
     source $HOME/.keychain/$HOSTNAME-sh
 fi
 
-alias ls="ls --group-directories-first $ls_colorize_opt"
+alias ls="${LS_CMD} --group-directories-first $ls_colorize_opt"
 alias ll='ls -lAh'
 alias la='ls -a'
 alias l='ls'
