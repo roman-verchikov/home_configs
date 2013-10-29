@@ -1,7 +1,13 @@
 [ -d /usr/local/bin ] && PATH=/usr/local/bin:$PATH
 
 # add some colors to the prompt
-PS1="\[$(tput bold)\]\[$(tput setaf 1)\]\u\[$(tput sgr0)\]@\[$(tput setaf 5)\]\h\[$(tput setaf 3)\] \W\[$(tput sgr0)\]\\$ "
+username="\[$(tput bold)\]\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
+hostname="\[$(tput setaf 5)\]\h\[$(tput sgr0)\]"
+workdir="\[$(tput setaf 4)\]\W\[$(tput sgr0)\]"
+dollarsign="\[$(tput setaf 4)\]\$\[$(tput sgr0)\]"
+gitbranch='\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr0)\]'
+
+export PS1="${username}@${hostname} ${workdir}${gitbranch} ${dollarsign} "
 export EDITOR=vim
 
 LS_CMD=$(which ls)
