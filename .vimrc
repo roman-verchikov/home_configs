@@ -1,6 +1,15 @@
 syntax on
 filetype plugin indent on
 
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-fugitive'
+Bundle 'davidhalter/jedi-vim'
+
+set nocompatible
 set expandtab
 set hlsearch
 set incsearch
