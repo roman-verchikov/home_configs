@@ -10,3 +10,4 @@ set shiftwidth=4
 set ignorecase
 set tabstop=4
 set background=dark
+set modeline
