@@ -34,7 +34,7 @@ elif [ $(uname -o) = 'Cygwin' ]; then
 fi
 
 # Syntax highligh for GNU less
-LESSPIPE=$(which src-hilite-lesspipe.sh)
+LESSPIPE=$(which src-hilite-lesspipe.sh 2>/dev/null)
 if [ ${LESSPIPE} ]; then
     export LESSOPEN="| ${LESSPIPE} %s"
     export LESS='-R'
