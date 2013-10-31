@@ -33,6 +33,13 @@ elif [ $(uname -o) = 'Cygwin' ]; then
     source $HOME/.keychain/$HOSTNAME-sh
 fi
 
+# Syntax highligh for GNU less
+LESSPIPE=$(which src-hilite-lesspipe.sh)
+if [ ${LESSPIPE} ]; then
+    export LESSOPEN="| ${LESSPIPE} %s"
+    export LESS='-R'
+fi
+
 alias ls="${LS_CMD} --group-directories-first $ls_colorize_opt"
 alias ll='ls -lAh'
 alias la='ls -a'
@@ -47,6 +54,7 @@ case $HOSTNAME in
     'rverchikov-pc'     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
     'rverchikov-laptop' ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
     'rverchikov-mac'    ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
+    'rverchikov-mba'    ) export VAGRANT_CWD=~/Documents/stackinthebox                  ;;
 esac
 
 if [ -f ~/.bashrc.local ]; then
