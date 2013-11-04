@@ -20,3 +20,6 @@ set ignorecase
 set tabstop=4
 set background=dark
 set modeline
+
+" disable docstring jedi-vim autocomplete
+autocmd FileType python setlocal completeopt-=preview
