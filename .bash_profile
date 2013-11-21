@@ -1,4 +1,4 @@
-[ -d /usr/local/bin ] && PATH=/usr/local/bin:$PATH
+[[ -d /usr/local/bin ]] && PATH=/usr/local/bin:$PATH
 
 # add some colors to the prompt
 username="\[$(tput bold)\]\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
@@ -13,20 +13,20 @@ export EDITOR=vim
 LS_CMD=$(which ls)
 
 ls_colorize_opt='--color'
-if [ $(uname) = 'Darwin' ]; then
+if [[ $(uname) = 'Darwin' ]]; then
     export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
 
     # use gnu coreutils whenever possible
-    if [ $(which gls) ]; then
+    if [[ $(which gls) ]]; then
         LS_CMD=$(which gls)
     else
         ls_colorize_opt='-G'
     fi
 
-    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+    if [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]]; then
         . $(brew --prefix)/share/bash-completion/bash_completion
     fi
-elif [ $(uname -o) = 'Cygwin' ]; then
+elif [[ $(uname -o) = 'Cygwin' ]]; then
     # Add SSH keys to keychain to avoid entering passwords all the time
     # required for cygwin environment only
     keychain $HOME/.ssh/id_rsa
@@ -35,7 +35,7 @@ fi
 
 # Syntax highligh for GNU less
 LESSPIPE=$(which src-hilite-lesspipe.sh 2>/dev/null)
-if [ ${LESSPIPE} ]; then
+if [[ ${LESSPIPE} ]]; then
     export LESSOPEN="| ${LESSPIPE} %s"
     export LESS='-R'
 fi
@@ -57,7 +57,7 @@ case $HOSTNAME in
     'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/stackinthebox                  ;;
 esac
 
-if [ -f ~/.bashrc.local ]; then
+if [[ -f ~/.bashrc.local ]]; then
     source ~/.bashrc.local
 fi
 
