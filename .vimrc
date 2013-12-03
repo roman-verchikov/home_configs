@@ -13,6 +13,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/tComment'
 
 set nocompatible
 set expandtab
@@ -29,7 +30,7 @@ set modeline
 " when assigning a path to a variable in bash script
 set isfname-==
 
-let g:clang_use_library = 1
+" let g:clang_use_library = 1
 
 " disable docstring jedi-vim autocomplete
 autocmd FileType python setlocal completeopt-=preview
