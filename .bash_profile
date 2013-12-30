@@ -1,7 +1,7 @@
 [[ -d /usr/local/bin ]] && PATH=/usr/local/bin:$PATH
 
 # add some colors to the prompt
-username="\[$(tput bold)\]\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
+username="\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
 hostname="\[$(tput setaf 5)\]\h\[$(tput sgr0)\]"
 workdir="\[$(tput setaf 4)\]\W\[$(tput sgr0)\]"
 dollarsign="\[$(tput setaf 4)\]\$\[$(tput sgr0)\]"
