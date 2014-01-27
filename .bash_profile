@@ -1,20 +1,20 @@
+if [[ -f /etc/bash_completion ]]; then
+    . /etc/bash_completion
+fi
+
+function is_installed() {
+    hash ${1} &>/dev/null
+}
+
 [[ -d /usr/local/bin ]] && PATH=/usr/local/bin:$PATH
 
-# add some colors to the prompt
-username="\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
-hostname="\[$(tput setaf 5)\]\h\[$(tput sgr0)\]"
-workdir="\[$(tput setaf 4)\]\W\[$(tput sgr0)\]"
-dollarsign="\[$(tput setaf 4)\]\$\[$(tput sgr0)\]"
-gitbranch='\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr0)\]'
-
-export PS1="${username}@${hostname} ${workdir}${gitbranch} ${dollarsign} "
 export EDITOR=vim
 
 LS_CMD=$(which ls)
 
 ls_colorize_opt='--color'
 if [[ $(uname) = 'Darwin' ]]; then
-    export VAGRANT_DEFAULT_PROVIDER='vmware_fusion'
+    export VAGRANT_DEFAULT_PROVIDER='virtualbox'
 
     # use gnu coreutils whenever possible
     if [[ $(which gls) ]]; then
@@ -33,10 +33,24 @@ elif [[ $(uname -o) = 'Cygwin' ]]; then
     source $HOME/.keychain/$HOSTNAME-sh
 fi
 
+# add some colors to the prompt
+username="\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
+hostname="\[$(tput setaf 5)\]\h\[$(tput sgr0)\]"
+workdir="\[$(tput setaf 4)\]\W\[$(tput sgr0)\]"
+dollarsign="\[$(tput setaf 4)\]\$\[$(tput sgr0)\]"
+
+if is_installed __git_ps1; then
+    gitbranch='\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr0)\]'
+else
+    echo '__git_ps1 is not installed! You may probably want to install git completion' 1>&2
+    gitbranch=''
+fi
+
+export PS1="${username}@${hostname} ${workdir}${gitbranch} ${dollarsign} "
+
 # Syntax highligh for GNU less
-LESSPIPE=$(which src-hilite-lesspipe.sh 2>/dev/null)
-if [[ ${LESSPIPE} ]]; then
-    export LESSOPEN="| ${LESSPIPE} %s"
+if is_installed src-hilite-lesspipe.sh; then
+    export LESSOPEN="| $(which src-hilite-lesspipe.sh) %s"
     export LESS='-R'
 fi
 
@@ -54,13 +68,9 @@ case $HOSTNAME in
     'rverchikov-pc'       ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
     'rverchikov-laptop'   ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
     'rverchikov-mac'      ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
-    'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/stackinthebox                  ;;
+    'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox/stackinthebox ;;
 esac
 
 if [[ -f ~/.bashrc.local ]]; then
     source ~/.bashrc.local
-fi
-
-if [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
 fi
