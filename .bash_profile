@@ -74,3 +74,8 @@ esac
 if [[ -f ~/.bashrc.local ]]; then
     source ~/.bashrc.local
 fi
+
+function no_comments() {
+    local file=$1
+    sed -r '/(#.*)|(^\s*$)/d' $file
+}
