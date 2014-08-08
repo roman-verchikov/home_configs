@@ -13,7 +13,7 @@ Bundle 'Shougo/unite.vim'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'derekwyatt/vim-scala'
 Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/tComment'
+Bundle 'ntpeters/vim-better-whitespace'
 
 set nocompatible
 set expandtab

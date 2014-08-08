@@ -15,6 +15,9 @@ LS_CMD=$(which ls)
 ls_colorize_opt='--color'
 if [[ $(uname) = 'Darwin' ]]; then
     export VAGRANT_DEFAULT_PROVIDER='virtualbox'
+    export LC_ALL='en_US.UTF-8'
+    export LC_CTYPE='en_US.UTF-8'
+    export LANG='en_US.UTF-8'
 
     # use gnu coreutils whenever possible
     if [[ $(which gls) ]]; then
@@ -68,7 +71,7 @@ case $HOSTNAME in
     'rverchikov-pc'       ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
     'rverchikov-laptop'   ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
     'rverchikov-mac'      ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
-    'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox/stackinthebox ;;
+    'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/mystackinthebox ;;
 esac
 
 if [[ -f ~/.bashrc.local ]]; then
@@ -78,4 +81,11 @@ fi
 function no_comments() {
     local file=$1
     sed -r '/(#.*)|(^\s*$)/d' $file
+}
+
+function git_log() {
+    local branch=$1
+    local depth=${2:-50}
+
+    git log -n "${depth}" --oneline "${branch}" | sed -E 's/^[0-9a-z]{7} //'
 }

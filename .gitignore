@@ -1,0 +1,11 @@
+*
+
+!.bash_profile
+!.bashrc
+!.config
+!.gitignore
+!.gvimrc
+!.inputrc
+!.minttyrc
+!.vimrc
+!setup-vim.sh
