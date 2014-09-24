@@ -68,10 +68,10 @@ alias du='du -h'
 alias grep='grep --color=always'
 
 case $HOSTNAME in
-    'rverchikov-pc'       ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
-    'rverchikov-laptop'   ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
-    'rverchikov-mac'      ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
-    'rverchikov-mba.local') export VAGRANT_CWD=~/Documents/mystackinthebox ;;
+    rverchikov-pc*     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
+    rverchikov-laptop* ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
+    rverchikov-mac*    ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
+    rverchikov-mba*    ) export VAGRANT_CWD=~/Documents/mystackinthebox ;;
 esac
 
 if [[ -f ~/.bashrc.local ]]; then
@@ -89,3 +89,4 @@ function git_log() {
 
     git log -n "${depth}" --oneline "${branch}" | sed -E 's/^[0-9a-z]{7} //'
 }
+
