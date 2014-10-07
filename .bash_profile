@@ -90,3 +90,15 @@ function git_log() {
     git log -n "${depth}" --oneline "${branch}" | sed -E 's/^[0-9a-z]{7} //'
 }
 
+function copy_over_ssh() {
+    # Copies compressed dir over SSH and unpacks it remotely
+    #
+    # Usage:
+    #   copy_over_ssh REMOTE [LOCAL_PATH] [REMOTE_PATH]
+    local remote=$1
+    local local_path=${2:-.}
+    local remote_path=${3:-/tmp}
+
+    tar -cf - $local_path | ssh $remote "(cd ${remote_path}; tar -xpf -)"
+}
+
