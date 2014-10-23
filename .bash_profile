@@ -26,8 +26,8 @@ if [[ $(uname) = 'Darwin' ]]; then
         ls_colorize_opt='-G'
     fi
 
-    if [[ -f $(brew --prefix)/share/bash-completion/bash_completion ]]; then
-        . $(brew --prefix)/share/bash-completion/bash_completion
+    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
+        . $(brew --prefix)/etc/bash_completion
     fi
 elif [[ $(uname -o) = 'Cygwin' ]]; then
     # Add SSH keys to keychain to avoid entering passwords all the time
@@ -98,6 +98,14 @@ function copy_over_ssh() {
     local remote=$1
     local local_path=${2:-.}
     local remote_path=${3:-/tmp}
+    local usage=$(cat << EOF
+Copies compressed dir over SSH and unpacks it remotely
+
+Usage:
+  copy_over_ssh REMOTE [LOCAL_PATH] [REMOTE_PATH]
+EOF)
+
+    [[ -z $remote ]] && echo "$usage"
 
     tar -cf - $local_path | ssh $remote "(cd ${remote_path}; tar -xpf -)"
 }
