@@ -26,6 +26,7 @@ set number
 set ignorecase
 set background=dark
 set modeline
+set modelines=5
 " allows for filename autocompletion when path starts after '=' sign, e.g.
 " when assigning a path to a variable in bash script
 set isfname-==
