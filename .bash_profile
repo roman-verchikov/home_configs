@@ -42,11 +42,14 @@ hostname="\[$(tput setaf 5)\]\h\[$(tput sgr0)\]"
 workdir="\[$(tput setaf 4)\]\W\[$(tput sgr0)\]"
 dollarsign="\[$(tput setaf 4)\]\$\[$(tput sgr0)\]"
 
+gitbranch=''
 if is_installed __git_ps1; then
-    gitbranch='\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr0)\]'
+    # Don't use __git_ps1 when it's painfully slow or failing
+    # see https://gist.github.com/bps/883177
+    git_status=$(__git_ps1 "(%s)")
+    [[ $? != 130 ]] && gitbranch='\[$(tput setaf 6)\]$(__git_ps1)\[$(tput sgr0)\]'
 else
     echo '__git_ps1 is not installed! You may probably want to install git completion' 1>&2
-    gitbranch=''
 fi
 
 export PS1="${username}@${hostname} ${workdir}${gitbranch} ${dollarsign} "
