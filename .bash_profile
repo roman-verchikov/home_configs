@@ -1,3 +1,6 @@
+LS_COMMAND="ls --color --group-directories-first"
+GREP_COMMAND=grep
+
 if [[ -f /etc/bash_completion ]]; then
     . /etc/bash_completion
 fi
@@ -9,32 +12,11 @@ function is_installed() {
 [[ -d /usr/local/bin ]] && PATH=/usr/local/bin:$PATH
 
 export EDITOR=vim
-
-LS_CMD=$(which ls)
-
-ls_colorize_opt='--color'
-if [[ $(uname) = 'Darwin' ]]; then
-    export VAGRANT_DEFAULT_PROVIDER='virtualbox'
-    export LC_ALL='en_US.UTF-8'
-    export LC_CTYPE='en_US.UTF-8'
-    export LANG='en_US.UTF-8'
-
-    # use gnu coreutils whenever possible
-    if [[ $(which gls) ]]; then
-        LS_CMD=$(which gls)
-    else
-        ls_colorize_opt='-G'
-    fi
-
-    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-elif [[ $(uname -o) = 'Cygwin' ]]; then
-    # Add SSH keys to keychain to avoid entering passwords all the time
-    # required for cygwin environment only
-    keychain $HOME/.ssh/id_rsa
-    source $HOME/.keychain/$HOSTNAME-sh
-fi
+case $(uname) in
+    Darwin) [[ -f ~/.bashrc.osx ]] && source ~/.bashrc.osx ;;
+    Cygwin) [[ -f ~/.bashrc.cygwin ]] && source ~/.bashrc.cygwin ;;
+    Linux) [[ -f ~/.bashrc.linux ]] && source ~/.bashrc.linux ;;
+esac
 
 # add some colors to the prompt
 username="\[$(tput setaf 2)\]\u\[$(tput sgr0)\]"
@@ -60,21 +42,18 @@ if is_installed src-hilite-lesspipe.sh; then
     export LESS='-R'
 fi
 
-alias ls="${LS_CMD} --group-directories-first $ls_colorize_opt"
+alias ls=$LS_COMMAND
 alias ll='ls -lAh'
 alias la='ls -a'
 alias l='ls'
 alias ssh='ssh -A'
 alias df='df -h'
 alias du='du -h'
-
-alias grep='grep --color=always'
+alias grep="$GREP_COMMAND --color"
 
 case $HOSTNAME in
-    rverchikov-pc*     ) export VAGRANT_CWD=/home/rverchikov/workspace/vagrant         ;;
     rverchikov-laptop* ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
-    rverchikov-mac*    ) export VAGRANT_CWD=~/Documents/apple/openstack/stackinthebox  ;;
-    rverchikov-mba*    ) export VAGRANT_CWD=~/Documents/mystackinthebox ;;
+    rverchikov-mbp*    ) export VAGRANT_CWD=~/Documents/mystackinthebox ;;
 esac
 
 if [[ -f ~/.bashrc.local ]]; then
@@ -113,4 +92,3 @@ EOF
 
     tar -cf - $local_path | ssh $remote "(cd ${remote_path}; tar -xpf -)"
 }
-
