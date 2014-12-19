@@ -2,6 +2,9 @@
 
 !.bash_profile
 !.bashrc
+!.bashrc.osx
+!.bashrc.cygwin
+!.bashrc.linux
 !.config
 !.gitignore
 !.gvimrc
