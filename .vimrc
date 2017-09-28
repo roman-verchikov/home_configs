@@ -1,19 +1,17 @@
-syntax on
-filetype plugin indent on
-
 set runtimepath+=~/.vim/bundle/vundle
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'Shougo/unite.vim'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'ervandew/supertab'
-Bundle 'ntpeters/vim-better-whitespace'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'bling/vim-airline'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'ervandew/supertab'
+Plugin 'fatih/vim-go'
+Plugin 'gmarik/vundle'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 
 set nocompatible
 set expandtab
@@ -33,7 +31,11 @@ set isfname-==
 
 " let g:clang_use_library = 1
 
+filetype plugin indent on
+syntax enable
+
 " disable docstring jedi-vim autocomplete
 autocmd FileType python setlocal completeopt-=preview
 autocmd BufNewFile,BufRead *.scala setlocal ft=scala
 autocmd FileType scala setlocal shiftwidth=2 tabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2

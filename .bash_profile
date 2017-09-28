@@ -9,7 +9,9 @@ function is_installed() {
     hash ${1} &>/dev/null
 }
 
-[[ -d /usr/local/bin ]] && PATH=/usr/local/bin:$PATH
+[[ -d /usr/local/bin ]] && export PATH=/usr/local/bin:$PATH
+# needed for homebrew
+[[ -d /usr/local/sbin ]] && export PATH=/usr/local/sbin:$PATH
 
 export EDITOR=vim
 case $(uname) in
@@ -51,11 +53,6 @@ alias df='df -h'
 alias du='du -h'
 alias grep="$GREP_COMMAND --color"
 
-case $HOSTNAME in
-    rverchikov-laptop* ) export VAGRANT_CWD=C:/Users/Roman/Documents/Workspace/vagrant ;;
-    rverchikov-mbp*    ) export VAGRANT_CWD=~/Documents/mystackinthebox ;;
-esac
-
 if [[ -f ~/.bashrc.local ]]; then
     source ~/.bashrc.local
 fi
@@ -92,3 +89,11 @@ EOF
 
     tar -cf - $local_path | ssh $remote "(cd ${remote_path}; tar -xpf -)"
 }
+
+export GOPATH="${HOME}/Documents/golang"
+
+[[ ! -d "${GOPATH}" ]] && mkdir -p "${GOPATH}"
+export PATH=${GOPATH}/bin:${PATH}
+
+export NVM_DIR="/Users/rverchikov/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
